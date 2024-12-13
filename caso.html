@@ -4,21 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>John Wayne - CrimeSphere</title>
-  <link rel="stylesheet" href="caso.css">
+  <!-- Importando Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <h1>CrimeSphere</h1>
-    <nav>
-      <a href="index.html">Voltar</a>
+<body class="m-0 font-sans bg-gray-900 text-white">
+  <!-- Cabeçalho -->
+  <header class="flex justify-between items-center px-8 py-4 bg-black">
+    <h1 class="text-xl font-bold">CrimeSphere</h1>
+    <nav class="flex items-center gap-2">
+      <i class="fa-solid fa-magnifying-glass text-white"></i>
+      <input type="text" placeholder="Pesquisar..." id="search-bar" class="px-4 py-2 rounded bg-gray-800 text-white focus:outline-none">
     </nav>
   </header>
-  <main>
-    <h2>John Wayne Gacy</h2>
-    <img src="john-wayne-large.jpg" alt="John Wayne" style="width: 100%; max-width: 600px; display: block; margin: 1rem auto;">
-    <p>
-      John Wayne Gacy foi um serial killer americano responsável por assassinar pelo menos 33 jovens entre 1972 e 1978. Conhecido como o "Palhaço Assassino", ele se passava por Pogo, um palhaço, para atrair vítimas. Ele foi capturado em 1978 e executado em 1994.
-    </p>
+
+  <!-- Conteúdo Principal -->
+  <main class="p-8">
+    <div class="max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+      <h2 class="text-center text-2xl font-semibold mb-4">John Wayne Gacy</h2>
+      <img src="john-wayne.jpg" alt="John Wayne" class="w-full max-w-xl mx-auto block rounded-lg shadow-lg mb-6">
+      <p>
+        John Wayne Gacy foi um serial killer americano responsável por assassinar pelo menos 33 jovens entre 1972 e 1978. Conhecido como o "Palhaço Assassino", ele se passava por Pogo, um palhaço, para atrair vítimas. Ele foi capturado em 1978 e executado em 1994.
+      </p>
+    </div>
   </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-black text-white py-4 shadow-inner">
+    <div class="container mx-auto px-4 text-center">
+        <p class="text-sm">© 2024 - CrimeSphere</p> <!-- Texto centralizado no rodapé -->
+    </div>
+</footer>
+
 </body>
 </html>

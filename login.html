@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrimeSphere - Login e Cadastro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-800 to-black flex justify-center items-center h-screen">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg w-96">
+    <!-- Logo e título -->
+    <div class="flex justify-center mb-6">
+      <img src="https://via.placeholder.com/80" alt="CrimeSphere Logo" class="w-20 h-20">
+    </div>
+    <h1 class="text-3xl text-white text-center mb-6 font-semibold">CrimeSphere</h1>
+
+    <!-- Seção de Login -->
+    <div id="loginSection">
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <label for="username" class="block text-white mb-2">Username</label>
+          <input type="text" id="username" name="username" class="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+        </div>
+        <div>
+          <label for="password" class="block text-white mb-2">Password</label>
+          <input type="password" id="password" name="password" class="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+        </div>
+        <div class="flex justify-between items-center">
+          <a href="#" class="text-gray-400 text-sm">Esqueceu sua senha?</a>
+          <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">Login</button>
+        </div>
+      </form>
+      <p id="errorMessage" class="text-red-500 text-center mt-4 hidden">Nome de usuário ou senha incorretos!</p>
+      <p class="text-center text-gray-400 mt-4">Não tem uma conta? <span id="showRegister" class="text-blue-400 cursor-pointer">Cadastre-se</span></p>
+    </div>
+
+    <!-- Seção de Cadastro -->
+    <div id="registerSection" class="hidden">
+      <form id="registerForm" class="space-y-6">
+        <div>
+          <label for="newUsername" class="block text-white mb-2">Username</label>
+          <input type="text" id="newUsername" name="newUsername" class="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+        </div>
+        <div>
+          <label for="newPassword" class="block text-white mb-2">Password</label>
+          <input type="password" id="newPassword" name="newPassword" class="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+        </div>
+        <div>
+          <label for="confirmPassword" class="block text-white mb-2">Confirmar Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+        </div>
+        <div class="flex justify-between items-center">
+          <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"><a href="home.html">Cadastrar</a></button>
+        </div>
+      </form>
+      <p class="text-center text-gray-400 mt-4">Já tem uma conta? <span id="showLogin" class="text-blue-400 cursor-pointer">Faça login</span></p>
+    </div>
+  </div>
+
+  <script>
+    // Funções para alternar entre as telas de login e cadastro
+    document.getElementById('showRegister').addEventListener('click', function() {
+      document.getElementById('loginSection').classList.add('hidden');
+      document.getElementById('registerSection').classList.remove('hidden');
+    });
+
+    document.getElementById('showLogin').addEventListener('click', function() {
+      document.getElementById('registerSection').classList.add('hidden');
+      document.getElementById('loginSection').classList.remove('hidden');
+    });
+
+    // Dados fictícios para validação
+    const validUsername = "admin";
+    const validPassword = "senha123";
+
+    // Função que valida o login
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Validação simples de login
+      if (username === validUsername && password === validPassword) {
+        alert("Login bem-sucedido!");
+        // Redirecionar ou realizar outra ação após login bem-sucedido
+      } else {
+        // Exibe mensagem de erro se o login falhar
+        document.getElementById('errorMessage').classList.remove('hidden');
+      }
+    });
+
+    // Função que valida o cadastro
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const newUsername = document.getElementById('newUsername').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Validação simples de cadastro
+      if (newPassword === confirmPassword) {
+        alert("Cadastro realizado com sucesso!");
+        // Após o cadastro, você pode redirecionar ou limpar os campos
+        document.getElementById('registerForm').reset();
+        document.getElementById('registerSection').classList.add('hidden');
+        document.getElementById('loginSection').classList.remove('hidden');
+      } else {
+        alert("As senhas não coincidem!");
+      }
+    });
+  </script>
+</body>
+</html>

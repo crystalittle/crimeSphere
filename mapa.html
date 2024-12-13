@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação do documento como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva -->
+    <title>Mapa de Casos Criminais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importando o CSS da biblioteca Leaflet para o mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Definindo a altura do mapa, ocupando o espaço entre o cabeçalho e o rodapé */
+        #map {
+            height: calc(100vh - 8rem); /* Calcula a altura com base na altura total da viewport */
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-gray-300 to-gray-500 text-gray-800">
+    <!-- Cabeçalho -->
+    <header class="flex justify-between items-center px-8 py-4 bg-black">
+        <h1 class="text-xl font-bold text-white">CrimeSphere</h1>
+        <nav class="flex items-center gap-2">
+            <i class="fa-solid fa-magnifying-glass text-white"></i>
+            <input type="text" placeholder="Pesquisar..." id="search-bar" class="px-4 py-2 rounded bg-gray-800 text-white focus:outline-none">
+        </nav>
+    </header>
+
+    <!-- Área do Mapa -->
+    <main class="container mx-auto px-4 py-4">
+        <div id="map" class="rounded-lg shadow-md"></div> <!-- Div onde o mapa será renderizado -->
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-black text-white py-4 shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">© 2024 - CrimeSphere</p>
+        </div>
+    </footer>
+
+    <!-- Importando o JavaScript da biblioteca Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Inicializando o mapa na div com id 'map'
+        const map = L.map('map').setView([37.0902, -95.7129], 4); // Coordenadas do centro dos EUA e nível de zoom 4
+
+        // Adicionando o fundo do mapa usando a API do OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors' // Atribuição do OpenStreetMap
+        }).addTo(map);
+
+        // Definindo as localizações dos crimes e suas respectivas descrições
+        const crimeLocations = [
+            {
+                name: "Jeffrey Dahmer",
+                lat: 43.0389,  // Latitude de Milwaukee, onde os crimes ocorreram
+                lon: -87.9065, // Longitude de Milwaukee
+                description: "Jeffrey Dahmer, conhecido como o 'Canibal de Milwaukee', cometeu vários assassinatos em Milwaukee. Clique para mais informações.",
+                link: "https://pt.wikipedia.org/wiki/Jeffrey_Dahmer" // Link para mais informações sobre Jeffrey Dahmer
+            },
+            {
+                name: "John Wayne Gacy",
+                lat: 41.8369,  // Latitude de Chicago, onde Gacy cometeu seus crimes
+                lon: -87.6847, // Longitude de Chicago
+                description: "John Wayne Gacy, o 'Palhaço Assassino', cometeu assassinatos em Chicago. Clique para mais informações.",
+                link: "https://pt.wikipedia.org/wiki/John_Wayne_Gacy" // Link para mais informações sobre John Wayne Gacy
+            },
+            {
+                name: "Charles Manson",
+                lat: 34.0522,  // Latitude de Los Angeles, onde Manson e seus seguidores cometeram crimes
+                lon: -118.2437, // Longitude de Los Angeles
+                description: "Charles Manson e seus seguidores cometeram assassinatos em Los Angeles. Clique para mais informações.",
+                link: "https://pt.wikipedia.org/wiki/Charles_Manson" // Link para mais informações sobre Charles Manson
+            }
+        ];
+
+        // Adicionando marcadores para cada caso de crime
+        crimeLocations.forEach(crime => {
+            const marker = L.marker([crime.lat, crime.lon]).addTo(map); // Criando o marcador para o crime
+
+            // Configurando o conteúdo do popup que será exibido ao clicar no marcador
+            marker.bindPopup(`
+                <b>${crime.name}</b><br>  <!-- Nome do criminoso -->
+                ${crime.description}<br>  <!-- Descrição do crime -->
+                <a href="${crime.link}" target="_blank" class="text-blue-600">Saiba mais</a> <!-- Link para mais informações -->
+            `);
+        });
+    </script>
+</body>
+
+</html>
